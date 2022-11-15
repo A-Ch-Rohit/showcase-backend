@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=user.name%> - Showcase</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/logo%2FShowCase%20logo-modified.ico?alt=media&token=1cb0428c-bfbf-4801-9c1a-32ab9e016fa4">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .profile-edit-btn {
+    display: inline-block;
+    font: inherit;
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    cursor: pointer;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* Profile Section */
+
+.profile {
+    padding: 5rem 0;
+}
+
+.profile::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.profile-image {
+    float: left;
+    width: calc(33.333% - 1rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3rem;
+    padding-top: 3%;
+}
+
+.profile-image img {
+    border-radius: 50%;
+}
+
+.profile-user-settings,
+.profile-stats,
+.profile-bio {
+    float: left;
+    width: calc(66.666% - 2rem);
+}
+
+.profile-user-settings {
+    margin-top: 1.1rem;
+}
+
+.profile-user-name {
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.profile-edit-btn {
+    font-size: 1.4rem;
+    line-height: 1.2;
+    border: 0.3rem solid #dbdbdb;
+    border-radius: 0.6rem;
+    padding: 0 2.4rem;
+    margin-left: 2rem;
+}
+
+.profile-settings-btn {
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+.profile-stats {
+    margin-top: 2.0rem;
+}
+
+.profile-stats li {
+    display: inline-block;
+    font-size: 1.3rem;
+    line-height: 1.0;
+    margin-right: 4rem;
+    cursor: pointer;
+}
+
+.profile-stats li:last-of-type {
+    margin-right: 0;
+}
+
+.profile-bio {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.0;
+    margin-top: 2.0rem;
+}
+
+.profile-real-name,
+.profile-stat-count,
+.profile-edit-btn {
+    font-weight: 600;
+}   
+
+    </style>
+
+
+
+</head>
+<body id="bd">
+    <%- include('partials/header.ejs'); %>
+    <div class="plus-upload" id="plus-upload"  style="border: #3371f2;border-width: 5px; width: 50%;">
+        <button type="button" class="p-upload btn-outline-primary" onclick="openNav()" onmouseover="text()" onmouseout="text_out()"><i class="pi-upload fas fa-plus"></i>
+            <p class="post-text" id="post-text" style="font-family: Roboto;font-weight:500" >Post Video</p>
+        </button>
+    </div>
+    <section class="profile-back" style="background-color: #F4F4F2;">
+    <div class="profie-info">
+        <div class="container">
+            <div class="profile">
+                <div class="profile-image">
+                    <% if(user.picture!==""){%>
+                        <img class="profile-picture" src='<%- user.picture %>' style="border-radius: 100%;"/>
+                    <%}else{%>
+                    <i class="material-icons" style="font-size: 150px;">account_circle</i>
+                    <%}%>
+    
+                </div>
+    
+                <div class="profile-user-settings">
+    
+                    <h1 class="profile-user-name"><%=user.name%></h1>
+    
+                    <a href="/account/edit" class="btn profile-edit-btn">Edit Profile</a>
+    
+                    <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+    
+                </div>
+    
+                <div class="profile-stats">
+    
+                    <ul>
+                        <li><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 0C2.7 0 0 2.7 0 6C0 9.3 2.7 12 6 12C9.3 12 12 9.3 12 6C12 2.7 9.3 0 6 0ZM6 11.25C3.1 11.25 0.75 8.9 0.75 6C0.75 3.1 3.1 0.75 6 0.75C8.9 0.75 11.25 3.1 11.25 6C11.25 8.9 8.9 11.25 6 11.25ZM8.5 5.35L5.1 3.4C4.85 3.25 4.6 3.25 4.35 3.4C4.15 3.55 4 3.75 4 4.05V7.95C4 8.2 4.15 8.45 4.4 8.6C4.5 8.65 4.65 8.7 4.8 8.7C4.95 8.7 5.05 8.65 5.2 8.6L8.6 6.65C8.85 6.5 9 6.25 9 6C9 5.75 8.75 5.5 8.5 5.35ZM4.75 7.95V4.05L8.15 6L4.75 7.95Z" fill="#0B1514"/>
+                            </svg>
+                            <span class="profile-stat-count"><%=my_products.length%></span> <p class="p-vid">videos</p></li>
+                        <!--<li><span class="profile-stat-count">188</span> followers</li>
+                        <li><span class="profile-stat-count">206</span> following</li>-->
+                    </ul>
+    
+                </div>
+    
+                <div class="profile-bio">
+    
+                    <% if(profile.bio&&profile.bio!==undefined){%>
+                        <% var bio=(profile.bio).split('\n');var b="";for(let i=0;i < bio.length;i++){ %>
+                        <p><%=bio[i]%></p>
+                      <%}}else{%>
+                      <p><span class="profile-real-name"><%=user.name%></span> <a href="/account/edit" style="color:black;text-decoration: none;">Add Bio</a></p>
+                      <%}%>
+    
+                </div>
+                <div class="uploading">
+                    <button type="button" class="btn btn-outline-primary" onclick="openNav()">Post video</button>
+                </div>
+            </div>
+            <!-- End of profile section -->
+    
+            
+        </div>
+        <!-- End of container -->
+    
+    </div>
+</section>
+    <div class="post-video container" style="padding-top: 75px;">
+
+        <div class="row">
+            <% var i=0; if(!my_products.pdt_brand){ my_products.forEach((item)=>{%>
+            <div class="each-post col-md-3 col-sm-6">
+                <video class="each-video" id="p-video">
+                    <source
+                            src="<%-item.pdt_video %>"
+                            type="video/mp4"
+                          />
+                </video>
+
+                <a class="vid-play" id="<%-item.pdt_video %>" onclick="video(event)"><i class=" fas fa-play"></i></a>
+                <div class="video-menu dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="editdrop" data-toggle="dropdown">
+                        <i class="drop-icon fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="v-menu dropdown-menu">
+                        <a id="<%-item.pdt_video %>" onclick="edit(event)" class="dropdown-item"><i class="fas fa-edit" style="padding-right: 10px;"></i>Edit</a>
+                        <a id="<%-item.pdt_video %>" onclick='del(event)'class="dropdown-item"><i class="fas fa-trash" style="padding-right: 10px;"></i>Delete</a>
+                    </div>
+                </div>
+            </div>
+            <%i++;})}else{%>
+                <div class="no-posts">
+                    <h3 class="container" style="text-align: center;">No Videos</h3>
+                </div>
+                <%}%>
+        </div>
+    </div>
+    <div id="Videonav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="video_close()"  ontouchend="video_close()">&times;</a>
+        <div class="container">
+          <div class="row">
+            <div class="video-col col-md-6">
+              <video class="view-video d-flex" id="play-vid" autoplay controls>
+                <source
+                        type="video/mp4"
+                      />
+            </video>
+            </div>
+            <div class="col-md-6">
+              <div class="v-content container-md">
+                <div class="d-row row">
+                  <div class="vi-content col-md-9">
+                    <p id="u_comp">Company Name</p>
+                    <h3 id="u_brand">Brand</h3>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="price">
+                      <p id="u_amt">Rs. Amount</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div clas="container col-md-3">
+                    <p class="dp" id="u_dp">Description</p>
+                  </div>
+                </div>
+                <div class="bt d-flex" style=" padding-bottom: 78px;">
+                    <a class="video-btn" id="what" href="#" style="text-decoration: none;"><p class="btn-text">WhatsApp</p><p class="btn-small">Contact on Whatsapp</p></a>
+                  <a class="video-btn" id="location" href="#" style="text-decoration: none;"><p class="btn-text">GPS</p><p class="btn-small">Look for direction</p></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a class="mb-3">
+            
+        </a>
+        <div class="container-sm">
+            <h2 class="container" style="font-family: Poppins;padding-top:10px;padding-bottom: 10px;">New Post</h2>
+            <div class="up-form input-group mb-3 col-md-8" style="font-family: Circular Std Book;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" style="font-family: Circular Std Book;">Upload</span>
+                </div>
+                <div class="custom-file" style="font-family: Circular Std Book;">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".mp4" required>
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+              </div>
+            <div class="preview row">
+                <div class="row">
+                <div class="col-md-8 container" style="font-family: Circular Std Book;" style="font-family: Circular Std Book;">
+                    <p id="msg" class="msg" style="text-align: left;padding-left: 5px;">No files currently selected for upload</p>
+                </div>
+            
+                    <video id="thumbnail" class="thumbnail d-flex mx-auto col-md-4">
+
+                    </video> 
+                
+               
+                </div>
+
+                <div class="container">
+                <form method="post" action="/upload-video" id="upload-form">
+                    <div class="col-md-8">
+                    <div class="form-group" ; style="text-align: left;font-family: Circular Std Book;" >
+                        <label for="c_name" style="text-align: left;"><b>Company Name*</b></label>
+                        <input type="text" class="c-name form-control" placeholder="Invictus Innocent" name="c_name" value='<%- user.name %>' id="c_name" disabled>
+                    </div>
+                    <div class="form-group" ; style="text-align:left;font-family: Circular Std Book;">
+                        <label for="c_email" style="text-align:left;"><b>Email address*</b></label>
+                        <input pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" title="Enter a valid email id" class="b-email form-control" placeholder="Enter email address" value='<%- user.email %>' name="c_email" id="c_email" disabled>
+                    </div>
+
+        
+                    <div class="form-group"; style="text-align:left;font-family: Circular Std Book; " >
+                        <label for="c_brand" style="text-align:left;" ><b>Product Brand (with Model)*</b></label>
+                        <input type="text" class="b-pwd form-control" placeholder="Enter brand" onkeyup="stoppedTyping()" name="c_brand" id="c_brand" required>
+                    </div>
+
+                    <div class="form-group"; style="text-align:left; font-family: Circular Std Book;" >
+                        <label for="c_type" style="text-align:left;" ><b>Product Type*</b></label>
+                        <input type="text" class="b-pwd form-control" placeholder="Enter Product type" onkeyup="stoppedTyping()" name="c_type" id="c_type" required>
+                    </div>
+                    <div class="form-group"; style="text-align: left;font-family: Circular Std Book;">
+                        <label for="category" ; style="text-align:left;"><b>Category</b></label>
+                        <select id="category"  class="b-ct form-control"  name="category" onkeyup="stoppedTyping()" placeholder="Select Category">
+                            <option>shirt</option>
+                            <option>shoes</option>
+                            <option>pant</option>
+                        </select>
+                    </div>
+                    <div class="form-group"; style="text-align:left;font-family: Circular Std Book; " >
+                        <label for="c_amt" style="text-align:left;" ><b>Product Price*</b></label>
+                        <input type="text" class="b-pwd form-control" placeholder="Enter Product Price" onkeyup="stoppedTyping()" name="c_amt" id="c_amt" required>
+                    </div>
+                    <div class="form-group"; style="text-align:left;font-family: Circular Std Book; " >
+                        <label for="c_dp" style="text-align:left;" ><b>Product Description*</b></label>
+                        <textarea  class="b-pwd form-control" placeholder="Enter Product Description" onkeyup="stoppedTyping()" name="c_dp" id="c_dp" required></textarea>
+                    </div>
+                    <div class="form-group"; style="text-align:left;font-family: Circular Std Book; " >
+                        <input type="text" class="b-url form-control" placeholder="Enter brand" name="video_url" id="video_url" required>
+                    </div>
+                    <input type="text" class="b-file" name="filename" style="display:none" id="b-file" requrired>
+                    <div class="form-group"; style="text-align: left;font-family: Circular Std Book;">
+                        <button type="submit" id="up-submit" class="upload-submit btn btn-outline-primary">Submit</button>
+                    </div>
+                    <div class="upload-progress">
+                        <p id="up-msg" class="up-msg" style="font-family: Circular Std Book;"></p>
+                    <div class="prog" id="my-pb">
+
+                    </div>
+                    <div class="up-controls">
+                        <button id="pause" class="pause" onclick="upload_pause()"><i class="fas fa-pause"></i></button>
+                        <button id="resume" class="resume" onclick="upload_resume()"><i class="fas fa-play"></i></button>
+                        <button id="cancel" class="cancel" onclick="upload_cancel()"><i class="fas fa-times"></i></button>
+                    </div>
+                   
+                    </div>
+                </div>
+            
+            </form>
+            </div>
+            </div>
+           
+      
+        <div class="form-group container"; style="text-align: left;padding-top: 25px;font-family: Circular Std Book;">
+            <button type="button" id="u-btn" class="u-btn btn btn-outline-primary" onclick="upload()" disabled>Upload</button>
+            <button type="button" class="u-btn btn btn-outline-danger" onclick="closeNav()" >Cancel</button>
+        </div>
+        </div>
+      </div>
+
+      <div id="EditSidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="edit_close()">&times;</a>
+        <div class="container">
+            <form method="post" action="/edit-post" id="#">
+                <div class="col-md-8">
+                <h2 style="font-family: Poppins;padding-top:35px">Edit Info</h2>
+                <div class="form-group"; style="text-align:left;font-family: Circular Std Book;" >
+                    <label for="edit_brand" style="text-align:left" ><b style="font-family: Circular Std Book;">Product Brand (with Model)*</b></label>
+                    <input type="text" class="b-pwd form-control" placeholder="Enter brand" onkeyup="updateTyping()" name="u_brand" id="edit_brand" required>
+                </div>
+
+                <div class="form-group"; style="text-align:left; font-family: Circular Std Book;" >
+                    <label for="edit_type" style="text-align:left;" ><b style="font-family: Circular Std Book;">Product Type*</b></label>
+                    <input type="text" class="b-pwd form-control" placeholder="Enter Product type" onkeyup="updateTyping()" name="u_type" id="edit_type" required>
+                </div>
+                <div class="form-group"; style="text-align: left;font-family: Circular Std Book;">
+                    <label for="edit_category" style="text-align:left;"><b style="font-family: Circular Std Book;">Category</b></label>
+                    <select id="edit_category"  class="b-ct form-control"  name="u_category" onkeyup="updateTyping()" placeholder="Select Category">
+                        <option>shirt</option>
+                        <option>shoes</option>
+                        <option>pant</option>
+                    </select>
+                </div>
+                <div class="form-group" style="text-align:left;font-family: Circular Std Book;" >
+                    <label for="edit_amt" style="text-align:left;" ><b style="font-family: Circular Std Book;">Product Price*</b></label>
+                    <input type="text" class="b-pwd form-control" placeholder="Enter Product Price" onkeyup="updateTyping()" name="u_amt" id="edit_amt" required>
+                </div>
+
+                <div class="form-group"; style="text-align:left;font-family: Circular Std Book; " >
+                    <label for="u_dp" style="text-align:left;" ><b>Product Description*</b></label>
+                    <textarea  class="b-pwd form-control" placeholder="Enter Product Description" onkeyup="updateTyping()" name="u_dp" id="edit_dp" required></textarea>
+                </div>
+
+                <div class="form-group"style="text-align:left;font-family: Circular Std Book;">
+                    <input type="text" class="v_url form-control" placeholder="url" id="v_update" name="video" required>
+                </div>
+                
+                <div class="form-group"style="font-family: Circular Std Book;">
+                    <button type="submit" id="u-submit" class="u-submit btn btn-outline-primary">Update</button>
+                    <button type="button" class="u-btn btn btn-outline-danger" onclick="edit_close()" >Cancel</button>
+                </div>
+           
+            </div>
+        
+        </form>
+        </div>
+        </div>
+        <div id="Deletenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="delete_close()">&times;</a>
+            <div class="container">
+                <form method="post" action="/delete-post">
+                    <div class="col-md-8">
+                    <h2 class="delete-text" style="font-family: Poppins;">Do you want to Delete this video ?</h2>
+                    <input type="text" id="del-vid" name="del_vid" style="display:none;" required>
+                    <div class="form-group"; style="text-align: left;font-family: Circular Std Book;">
+                        <button type="submit" id="d-submit" class="upload-submit btn btn-outline-primary">Submit</button>
+                    </div>
+               
+                     </div>
+            
+            </form>
+            <div class="del-btns container form-group"style="font-family: Circular Std Book;">
+                <button type="submit" id="d-yes" onclick='remove_vid()'class="d-submit btn btn-outline-primary">Yes</button>
+                <button type="button" id="d-no" class="u-btn btn btn-outline-danger" onclick="delete_close()" >No</button>
+            </div>
+            </div>
+            </div>
+
+      <div class="new container" id="info">
+        
+      </div>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+<script>
+    function text(){
+        document.getElementById('plus-upload').style.left='85%'
+        document.getElementById('plus-upload').style.transition=".3s";
+        document.getElementById('post-text').textContent="Post Video";
+        const isMobile = window.matchMedia("only screen and (max-width: 500px)").matches;
+        if (isMobile) {
+            document.getElementById('plus-upload').style.left='80%';
+            document.getElementById('plus-upload').style.transition=".3s";
+        }
+    }
+    function text_out(){
+        document.getElementById('plus-upload').style.left='92%'
+        document.getElementById('post-text').textContent="";
+        const isMobile = window.matchMedia("only screen and (max-width: 500px)").matches;
+        if (isMobile) {
+            document.getElementById('plus-upload').style.left='80%';
+            document.getElementById('post-text').textContent="";
+        }
+    }
+    function openNav() {
+        document.getElementById('plus-upload').style.transition=".5s";
+        document.getElementById('plus-upload').style.display="none";
+        document.getElementById("mySidenav").style.height = "85%";
+        document.getElementById("main").style.marginBottom = "15px";
+    
+    }
+    function video(e){
+            var cp,br,gp,amt,dp,l;
+            if(e.target.id!==""){
+                '<% my_products.forEach((item)=>{%>'
+                if(e.target.id==='<%-item.pdt_video%>'){
+                  '<% let p_code,link="#";wtp.forEach((itm)=>{ if(itm.email===item.company_email){let p_code=(itm.code).split("+");link="http://wa.me/"+p_code[1]+itm.whatsapp;}})%>'
+                  ' <%let gps="#";wtp.forEach((itm)=>{ if((itm.email===item.company_email) &&itm.location!==undefined){gps="https://www.google.com/maps/dir//"+itm.location[0]+","+itm.location[1];}})%>'
+                  cp='<%-item.company_name%>'
+                    br='<%-item.pdt_brand%>';
+                    amt='Rs.<%-item.pdt_amt%>';
+                    dp=`<%- item.pdt_description %>`;
+                    l='<%-link%>';
+                    gp='<%-gps%>'
+                    document.getElementById("u_comp").textContent =cp;
+                    document.getElementById("u_brand").textContent =br; 
+                    document.getElementById("u_amt").textContent=amt; 
+                    document.getElementById("u_dp").textContent =dp;
+                    document.getElementById("what").href = l;
+                    document.getElementById("location").href = gp;
+                    document.getElementById("play-vid").src='<%-item.pdt_video%>';
+
+                }
+                '<%})%>'
+               document.getElementById("Videonav").style.height = "85%";
+               document.getElementById('plus-upload').style.display="none";
+            }
+      
+        }
+        function video_close(){
+        document.getElementById('d-yes').disabled=false;
+        document.getElementById("Videonav").style.height = "0";
+        document.getElementById("play-vid").pause();
+   }
+   function del(e){
+       if(e.target.id!=='')
+       {
+        document.getElementById('d-yes').disabled=false;
+        document.getElementById('d-no').disabled=false;
+        document.getElementById("del-vid").value =e.target.id; 
+        document.getElementById('plus-upload').style.display="none";
+        document.getElementById("Deletenav").style.height = "25%";
+       }
+   }
+   function delete_close(){
+        document.getElementById('d-yes').disabled=false;
+        document.getElementById("Deletenav").style.height = "0";
+        document.getElementById('plus-upload').style.display="block";
+   }
+    function edit(e){
+            var br,ty,cat,amt,dp;
+            if(e.target.id!==""){
+                '<% my_products.forEach((item)=>{%>'
+                if(e.target.id==='<%-item.pdt_video%>'){
+                    br='<%-item.pdt_brand%>';
+                    ty='<%-item.pdt_type%>';
+                    cat='<%-item.pdt_category%>';
+                    amt='<%-item.pdt_amt%>';
+                    dp=`<%- item.pdt_description %>`;
+                    document.getElementById("edit_brand").value =br; 
+                    document.getElementById("edit_type").value =ty; 
+                    document.getElementById("edit_category").value =cat; 
+                    document.getElementById("edit_amt").value =amt; 
+                    document.getElementById("edit_dp").value =dp;
+                    document.getElementById("v_update").value =e.target.id; 
+               document.getElementById("EditSidenav").style.height = "85%";
+               document.getElementById('plus-upload').style.display="none";
+                }
+                '<%})%>'
+               
+            }
+      
+        }
+
+
+    function edit_close() {
+        document.getElementById("EditSidenav").style.height = "0";
+        document.getElementById('plus-upload').style.display="block";
+      document.getElementById("main").style.marginBottom= "0";
+  
+      
+    }
+    
+    function closeNav() {
+        document.getElementById('plus-upload').style.transition=".5s";
+        document.getElementById('plus-upload').style.display="block";
+    if(t){
+        t.cancel();
+         document.getElementById('up-msg').textContent="Upload is cancelled";  
+      }
+      document.getElementById("mySidenav").style.height = "0";
+      document.getElementById("main").style.marginBottom= "0";
+      
+      document.getElementById("upload-form").reset();
+    }
+
+    const input = document.querySelector('.custom-file-input');
+    const preview = document.querySelector('.preview');
+    const msg=document.getElementById('msg');
+    const thumbnail=document.getElementById('thumbnail');
+
+    input.style.opacity = 0;
+
+    input.addEventListener('change', updateVideoDisplay);
+
+    function updateVideoDisplay() {
+        //while(preview.firstChild) {
+          //  preview.removeChild(preview.firstChild);
+        //}
+
+        const curFiles = input.files;
+        if(curFiles.length === 0) {
+            const para = document.createElement('p');
+            //para.textContent = 'No files currently selected for upload';
+            msg.textContent = 'No files currently selected for upload';
+            //preview.appendChild(para);
+        }
+        else if(curFiles.length > 1){
+            const para = document.createElement('p');
+            //para.textContent = 'Only one video should be selected for upload';
+            msg.textContent = 'Only one video should be selected for upload';
+            //preview.appendChild(para);
+        }
+         else {
+            const list = document.createElement('ol');
+            //preview.appendChild(list);
+
+            for(const file of curFiles) {
+            const listItem = document.createElement('li');
+            const para = document.createElement('p');
+            if(validFileType(file)) {
+                const video = document.createElement('video');
+                //video.src = URL.createObjectURL(file);
+                thumbnail.src = URL.createObjectURL(file);
+
+                if(thumbnail.duration > 15){
+                    //para.textContent = 'Video duration should be less than or eqaul to 15 seconds';
+                    msg.textContent = 'Video duration should be less than or eqaul to 15 seconds';
+                }
+                else{
+                    up=1;
+                    if(up===1 && document.getElementById('c_dp').value.length  > 0 && document.getElementById('c_brand').value.length > 0 && document.getElementById('c_type').value.length > 0 && document.getElementById('category').value.length > 0 && document.getElementById('c_amt').value.length > 0) { 
+                        document.getElementById('u-btn').disabled = false; 
+                    } else { 
+                        document.getElementById('u-btn').disabled = true;
+                    }
+                    //para.textContent = `File name ${file.name},duration ${video.duration} file size ${returnFileSize(file.size)}.`;
+                    msg.textContent = `File name ${file.name} file size ${returnFileSize(file.size)}.`;
+
+                   // listItem.appendChild(video);   
+                    //listItem.appendChild(para);
+                }
+                
+                
+            } else {
+                para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
+                listItem.appendChild(para);
+            }
+
+            list.appendChild(listItem);
+            }
+        }
+    }
+
+    const fileTypes = [
+        "video/mp4",
+];
+
+    function validFileType(file) {
+        return fileTypes.includes(file.type);
+    }
+
+    function returnFileSize(number) {
+        if(number < 1024) {
+            return number + 'bytes';
+        } else if(number >= 1024 && number < 1048576) {
+            return (number/1024).toFixed(1) + 'KB';
+        } else if(number >= 1048576) {
+            return (number/1048576).toFixed(1) + 'MB';
+        }
+    }
+var up=0;
+    function stoppedTyping(){
+        if(up===1  && document.getElementById('c_dp').value.length  > 0 && document.getElementById('c_brand').value.length > 0 && document.getElementById('c_type').value.length > 0 && document.getElementById('category').value.length > 0 && document.getElementById('c_amt').value.length > 0) { 
+            document.getElementById('u-btn').disabled = false; 
+        } else { 
+            document.getElementById('u-btn').disabled = true;
+        }
+    }
+
+    function updateTyping(){
+        if( document.getElementById('u_dp').value.length  > 0 && document.getElementById('u_brand').value.length > 0 && document.getElementById('u_type').value.length > 0 && document.getElementById('u_category').value.length > 0 && document.getElementById('u_amt').value.length > 0) { 
+            document.getElementById('u-submit').disabled = false; 
+        } else { 
+            document.getElementById('u-submit').disabled = true;
+        }
+    }
+
+
+    function upload_pause(){
+        t.pause();
+        document.getElementById('my-pb').style.backgroundColor="#F5B041";
+        document.getElementById('pause').style.display="none";
+        document.getElementById('resume').style.display="inline";
+      }
+      function upload_resume(){
+        t.resume();
+        document.getElementById('my-pb').style.backgroundColor="#3371f2";
+        document.getElementById('pause').style.display="inline";
+        document.getElementById('resume').style.display="none";
+      }
+      function upload_cancel(){
+        t.cancel();
+        document.getElementById('up-msg').textContent="Upload is cancelled";   
+        document.getElementById('my-pb').style.display="none";
+        document.getElementById('pause').style.display="none";
+        document.getElementById('resume').style.display="none";
+        document.getElementById('cancel').style.display="none";
+             
+      }
+
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyDPOH76XqzglF-v1w2KoDmI4zeo9GDo-tA",
+      authDomain: "showcase-7121e.firebaseapp.com",
+      projectId: "showcase-7121e",
+      storageBucket: "showcase-7121e.appspot.com",
+      messagingSenderId: "242305064415",
+      appId: "1:242305064415:web:39d96662217ef6adb6386a",
+      measurementId: "G-4X4Z7VQDW0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var t;
+    function remove_vid()
+    {
+        if(document.getElementById('del-vid').value!==""){
+            document.getElementById('d-yes').disabled=true;
+            document.getElementById('d-no').disabled=true;
+            var f_name;
+                '<% my_products.forEach((item)=>{%>'
+                if(document.getElementById('del-vid').value==='<%-item.pdt_video%>'){
+                    f_name='<%-item.pdt_filename%>';
+                }
+                '<%})%>'
+                const ref = firebase.storage().ref('users/<%- user.name %>/videos/'+f_name);
+                ref.delete().then(() => {
+                    setTimeout(()=>{
+                        alert("Video Deleted");    
+                        document.getElementById("d-submit").click();
+                    }, 1000);
+                }).catch((error) => {
+                    console.log(error);
+                });
+        }
+  
+    
+    }
+    function upload() {
+      const ref = firebase.storage().ref('users/<%- user.name %>/videos');
+      const file = document.querySelector('.custom-file-input').files[0];
+      const name = +new Date() + "-" + file.name;
+      const metadata = {
+        contentType: file.type
+      };
+      const task = ref.child(name).put(file, metadata);
+      t=task;
+      document.getElementById('pause').style.display="inline";
+      document.getElementById('cancel').style.display="inline";
+      document.getElementById('u-btn').disabled = true;
+      task.on('state_changed', 
+                    (snapshot) => {
+    // Observe state change events such as progress, pause, and resume
+    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    document.getElementById('up-msg').textContent="Upload in progress "+  Math.round(progress) + '% done';
+                    console.log('Upload is ' + progress + '% done');
+                    document.getElementById('my-pb').style.display="block";
+                    document.getElementById('my-pb').style.width=progress+"%";
+         
+                    console.log(progress)
+                    switch (snapshot.state) {
+                    case firebase.storage.TaskState.PAUSED: // or 'paused'
+                        document.getElementById('up-msg').textContent="Upload in progress "+ Math.round(progress) + '% is paused';
+                        console.log('Upload is paused');
+                        break;
+                    case firebase.storage.TaskState.RUNNING: // or 'running'
+                        console.log('Upload is running');
+                        break;
+                    }
+                }, 
+                (error) => {
+                    // Handle unsuccessful uploads
+                }, 
+                () => {
+                    // Handle successful uploads on complete
+                    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                    task.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                    });
+                }
+                );
+
+      task
+        .then(snapshot =>
+            snapshot.ref.getDownloadURL()
+        )
+        .then(url => {
+            console.log(url);
+            document.getElementById('up-msg').textContent="Uploaded Successfully";
+            document.getElementById('my-pb').style.backgroundColor="#2ECC71";
+            document.getElementById("video_url").value = url;
+            document.getElementById('b-file').value=name;
+            console.log(name);
+            setTimeout(()=>{
+                alert("Video Uploaded");    
+                document.getElementById("up-submit").click();
+                }, 1000);
+        })
+        .catch(console.error);
+    }
+
+</script>
+<br>
+<br>
+<br>
+<br>
+<br>
+      <%- include('partials/footer.ejs'); %>
+
+
+</body>
+</html>

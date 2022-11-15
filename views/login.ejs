@@ -1,0 +1,103 @@
+
+<html lang="en">
+<title>Login - Showcase</title>
+    <%- include('partials/head.ejs'); %>
+
+<body>
+<%- include('partials/header.ejs'); %>
+<br>
+<br>
+<br>
+<br>
+<div class="login-cont container">
+    <div class="row">
+        <div class="login-img col-md-6 col-sm-12">
+            <div class="head-login img-fluid d-flex mx-auto ">
+                <img src="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/logo%2FShowCase%20logo-modified.png?alt=media&token=cebf657d-39dd-44c7-a72e-f90639c6e2bb" >
+            </div>
+        </div>
+        <div class="login-form col-md-6 col-sm-12">
+            <h2>Login</h2>
+                <p>Please login using account detail below</p>
+
+                <form method="post" action="/login" class="login-form">     
+                <% if(f_message!==""){ var p=""%>
+                    <% if(f_message=="Password changed Successfully !!"){ p="alert-success" }else{ p="alert-danger" }%>
+                    <div class="flash alert <%-p %>" role="alert">
+                    <%=f_message %>
+                    </div>
+                <%}%>
+            <div class="form-group">
+            <input type="text" class="login-email form-control" placeholder="Enter email address" name="e_id" id="email" required>
+            </div>
+            <div class="form-group">
+                <input type="password"  class="login-pwd form-control" placeholder="Enter password" name="pwd" id="email-password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="signbtn">Sign In</button>
+            </div>
+            <p style="text-align: center;">Or</p>
+
+            <div class="form-group">
+                <div class="google-button g-signin2 justify-content" id="GoogeSigninButton" data-size="medium" data-onsuccess="onSignIn">Register with Google</div>
+            </div>
+            <a class="forget" href="/reset-password" style="text-align: center; align-items: center;">Forget your password?</a>
+            <br>
+            <br>
+            <p style="text-align: center;">Don't have an Account?<a href="/account" style="padding-left: 10px;text-decoration: none;">Create account</a></p>
+            <!--<a href="#" onclick="signOut();">Sign out</a>-->
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<%- include('partials/footer.ejs'); %>
+
+    <script>
+        function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                 console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+                var id_token = googleUser.getAuthResponse().id_token;
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/google-login');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function() {
+                    if(xhr.responseText=='success'){
+                        signOut();
+                        location.assign('/');
+                    }
+                    else if(xhr.responseText=='register'){
+                        signOut();
+                        location.assign('/auth/google/register');
+                    }
+                console.log('Signed in as: ' + xhr.responseText);
+                };
+                //xhr.send('idtoken=' + id_token);
+                xhr.send(JSON.stringify({token:id_token}));
+        }
+    </script>
+ 
+        
+        <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            console.log('User signed out.');
+            });
+        }
+        </script>
+
+</body>
+</html>

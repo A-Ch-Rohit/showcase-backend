@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <title>Razor Pay</title>
+</head>
+<body>
+    <script>
+        async function displayRazorpay(){
+        const data=await fetch("http://localhost:4000/razorpay",{method:"POST"})
+                    .then((t)=>t.json())
+        console.log("data",data)            
+        var options = {
+        "key": "rzp_test_Rk1Z4keHMYy91P", 
+        "currency":data.currency,
+        "amount":data.amount,
+        "order_id":data.id,
+        "name": "Subscribe",
+        "description": "Thank you for Subscribing",
+        "image": "http://localhost:4000/qurinom.jpg",
+        "handler": function (response){
+            location.assign("/profile")
+        },theme:{
+            color:"#fc6b03"
+        }
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+    /*rzp1.on('payment.failed', function (response){
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+    });*/
+    }
+         displayRazorpay()
+    </script>
+</body>
+</html>

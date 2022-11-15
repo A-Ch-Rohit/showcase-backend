@@ -1,0 +1,469 @@
+<html>
+  <head>
+    <title>Showcase</title>
+    <link rel="icon" type="image/x-icon" href="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/logo%2FShowCase%20logo-modified.ico?alt=media&token=1cb0428c-bfbf-4801-9c1a-32ab9e016fa4">
+  </head>
+<body id="land">
+  <%- include('partials/header.ejs'); %>
+  <svg class="left-svg" width="305" height="633" viewBox="0 0 305 633" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path opacity="0.46" fill-rule="evenodd" clip-rule="evenodd" d="M286.512 222.02C346.852 378.729 248.398 545.01 91.6885 605.35C-71.4513 668.166 -268.907 623.207 -331.723 460.067C-399.362 284.399 -309.083 88.3708 -133.415 20.7311C36.2975 -44.6155 221.166 52.3071 286.512 222.02Z" fill="#3371F2"/>
+</svg>
+<svg class="right-svg" width="383" height="476" viewBox="0 0 383 476" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M364.353 0C526.677 0 712.448 64.8339 712.448 227.158C712.448 394.056 531.25 475.095 364.353 475.095C192.245 475.095 0 399.266 0 227.158C0 59.4808 196.676 0 364.353 0Z" fill="#E5EDFF"/>
+  </svg>
+    <section class="intro">
+        <h1 class="intro-heading">Let's Showcase</h1>
+        <p class="sub-heading container">Bringing your product online is now easy and brezzy.
+          You have something to sell , show is online..</p>
+            <% if(user.email===undefined||!user.email){%>
+              <div class="bttn container-sm">
+                <a class="get" href="/account" style="text-decoration: none;cursor:pointer;">Get Started</a>
+           <!--    <button class="try" style="display:none;">Try For Free</button>--> 
+            </div>
+            <%}%>
+            
+    </section>
+
+   
+        <section class=" d-block mx-auto" >
+            <div id="demo" class="carousel slide" data-ride="carousel">
+     <!--         <ul class="carousel-indicators" >
+                  <li data-target="#demo" data-slide-to="0" class="active"></li>
+                  <%var p; for (let i = 1; i < shoes.length; i++) {%>
+                  <li data-target="#demo" data-slide-to="<%- i %>"></li>
+                <%};%>
+                </ul>-->  
+                <div class="carousel-inner" title="Click to know more">
+                  <%var pd; for (let i = 0; i < 1; i++) {%>
+                  <div class="carousel-item active "  data-interval="20000">
+                    <div class="story-v">
+                      <div class="for-click" onclick="display()" ontouchstart="display()" style="cursor: pointer;">
+                    <video class="story-v img-fluid d-block mx-auto" id="<%-shoes[i].pdt_video%>" autoplay controls loop>
+                          <source
+                            src="<%- shoes[i].pdt_video %>"
+                            type="video/mp4"
+                          />
+                        </video>
+                        <div class="story-content">
+                          <% let pic;let p_id; wtp.forEach((item)=>{ if(item.email===shoes[i].company_email){pic=item.picture;p_id=item._id}})%>
+                            <a class="st-row d-flex"  href="/profile=<%-p_id%>" style="text-decoration: none; color:white;" title="View Profile">
+                                <div class="l col-md-2">
+                                  <% if(pic){%>
+                                  <img class="dp-story d-block mx-auto"  src='<%- pic %>' >
+                                  <!--<img src= width="40px" height="40px" style="border-radius: 100%;"/>-->
+                              <%}else{%>
+                              <i class="material-icons" style="margin-left:50%;margin-top: 5%;">account_circle</i>
+                              <%}%>
+                                  
+                              </div>
+                              <div class="l-content col-md-10">
+                                  <h5 class="story-user"> <%= shoes[i].company_name  %></h5>
+                                  <p class="story-text"><%= shoes[i].pdt_brand %></p>
+                              </div>
+                            </a>
+                      </div> 
+                  </div>  
+                </div>
+                  <%var name="div"+i;%>
+                    <section class="describe" id="<%-name %>">
+                      <div class="d-content container-md">
+                        <div class="d-row row">
+                          <div class="vi-content col-md-10">
+                            <p><%= shoes[i].company_name%></p>
+                            <h3><%= shoes[i].pdt_brand %></h3>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="price">
+                              <p>Rs. <%= shoes[i].pdt_amt%>.00</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div clas="container col-md-3">
+                            <% if(shoes[i].pdt_description&&shoes[i].pdt_description!==undefined){%>
+                              <% var des=(shoes[i].pdt_description).split('\n');var b="";for(let i=0;i < des.length;i++){ %>
+                              <p class="dp"><%=des[i]%></p>
+                            <%}}else{%>
+                            <p></p>
+                            <%}%>
+                          </div>
+                        </div>
+                        <div class="v-bt row" style=" padding-bottom: 78px;">
+                          <% let p_code,link="#";wtp.forEach((item)=>{ if(item.email===shoes[i].company_email){let p_code=(item.code).split("+");link="http://wa.me/"+p_code[1]+item.whatsapp;}})%>
+                            <a class="vid-btn" href="<%-link%>" style="margin-right: 110px;text-decoration: none;"><p class="btn-text">WhatsApp</p><p class="btn-small">Contact on Whatsapp</p></a>
+                            <%let gps="#";wtp.forEach((item)=>{ if((item.email===shoes[i].company_email) &&item.location!==undefined){gps="https://www.google.com/maps/dir//"+item.location[0]+","+item.location[1];}})%>
+                          <a class="vid-btn" href="<%-gps%>" style="margin-right: 110px;text-decoration: none;"><p class="btn-text">GPS</p><p class="btn-small">Look for direction</p></a>
+                          <%if(user.type==="personal"){%>
+                          <form method="post" action="/save-video">
+                            <input type="text" name="video_comp" value="<%-shoes[i].company_name%>" style="display:none" required>
+                            <input type="text" name="video_email" value="<%-shoes[i].company_email%>" style="display:none" required>
+                            <input type="text" name="video_brand" value="<%-shoes[i].pdt_brand%>" style="display:none" required>
+                            <input type="text" name="video_type" value="<%-shoes[i].pdt_type%>" style="display:none" required>
+                            <input type="text" name="video_category" value="<%-shoes[i].pdt_category%>" style="display:none" required>
+                            <input type="text" name="video_amt" value="<%-shoes[i].pdt_amt%>" style="display:none" required>
+                            <textarea type="text" name="video_description" style="display:none" ><%-shoes[i].pdt_description%></textarea>
+                            <input type="text" name="video_link" value="<%-shoes[i].pdt_video%>"  style="display:none" required>
+                          <button class="save vid-btn" type="submit" id="save-1" style="text-decoration: none;"><p class="btn-text">Save</p><p class="btn-small">Save the video for later use</p></button>
+                        </form>
+                        <%}%>
+                        </div>
+</div>
+                    </section>  
+                  </div>
+                  <%};%>
+                  <%var pd; for (let i = 1; i < shoes.length; i++) {%>
+                    <div class="carousel-item "  data-interval="20000">
+                      <div class="story-v">
+                        <div class="for-click" onclick="display()" ontouchstart="display()" style="cursor: pointer;">
+                      <video class="story-v img-fluid d-block mx-auto" autoplay controls loop>
+                            <source
+                              src="<%- shoes[i].pdt_video %>"
+                              type="video/mp4"
+                            />
+                          </video>
+                          <div class="story-content">
+                            <% let pic;let p_id; wtp.forEach((item)=>{ if(item.email===shoes[i].company_email){pic=item.picture;p_id=item._id}})%>
+                            <a class="st-row d-flex"  href="/profile=<%-p_id%>"  style="text-decoration: none; color:white;" title="View Profile">
+                                <div class="l col-md-2">
+                                  <% if(pic){%>
+                                    <img class="dp1-story d-block mx-auto"  src='<%- pic %>'>
+                                    <!--<img src= width="40px" height="40px" style="border-radius: 100%;"/>-->
+                                <%}else{%>
+                                <i class="material-icons" style="margin-left:50%;margin-top: 5%;">account_circle</i>
+                                <%}%>
+                                    
+                                </div>
+                                <div class="l-content col-md-10">
+                                    <h5 class="story-user"> <%= shoes[i].company_name  %></h5>
+                                    <p class="story-text"><%= shoes[i].pdt_brand %></p>
+                                </div>
+                              </a>
+                        </div> 
+                      </div>
+                    </div>  
+                    <%var name="div"+i;%>
+                      <section class="describe" id="<%-name %>">
+                        <div class="d-content container-md">
+                          <div class="d-row row">
+                            <div class="vi-content col-md-10" >
+                              <p><%= shoes[i].company_name%></p>
+                              <h3><%= shoes[i].pdt_brand %></h3>
+                            </div>
+                            <div class="col-md-2">
+                              <div class="price">
+                                <p>Rs. <%= shoes[i].pdt_amt%>.00</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div clas="container col-md-3">
+                              <p class="dp"><%= shoes[i].pdt_description%></p>
+                            </div>
+                          </div>
+                          <div class="v-bt row" style=" padding-bottom: 78px;">
+                            <% let p_code,link="#";wtp.forEach((item)=>{ if(item.email===shoes[i].company_email){let p_code=(item.code).split("+");link="http://wa.me/"+p_code[1]+item.whatsapp;}})%>
+     
+                            <a class="vid-btn" href="<%-link%>" style="margin-right: 110px;text-decoration: none;"><p class="btn-text">WhatsApp</p><p class="btn-small">Contact on Whatsapp</p></a>
+                            <%let gps="#";wtp.forEach((item)=>{ if((item.email===shoes[i].company_email) &&item.location!==undefined){gps="https://www.google.com/maps/dir//"+item.location[0]+","+item.location[1];}})%>
+                            <a class="vid-btn" href="<%-gps%>" style="margin-right: 110px;text-decoration: none;"><p class="btn-text">GPS</p><p class="btn-small">Look for direction</p></a>
+                            <%if(user.type==="personal"){%>
+                            <form method="post" action="/save-video">
+                              <input type="text" name="video_comp" value="<%-shoes[i].company_name%>" style="display:none" required>
+                              <input type="text" name="video_email" value="<%-shoes[i].company_email%>" style="display:none" required>
+                              <input type="text" name="video_brand" value="<%-shoes[i].pdt_brand%>" style="display:none" required>
+                              <input type="text" name="video_type" value="<%-shoes[i].pdt_type%>" style="display:none" required>
+                              <input type="text" name="video_category" value="<%-shoes[i].pdt_category%>" style="display:none" required>
+                              <input type="text" name="video_amt" value="<%-shoes[i].pdt_amt%>" style="display:none" required>
+                              <textarea type="text" name="video_description" style="display:none" ><%-shoes[i].pdt_description%></textarea>
+                              <input type="text" name="video_link" value="<%-shoes[i].pdt_video%>"  style="display:none" required>
+                            <button class="save vid-btn" onclick="alert(`Video Saved`)" type="submit" id="save" style="text-decoration: none;"><p class="btn-text">Save</p><p class="btn-small">Save the video for later use</p></button>
+                          </form>
+                          <%}%>
+                          </div>
+                        </div>
+                      </section>  
+                    </div>
+                    <%};%>
+                </div>
+                <a class="story-left carousel-control-prev" href="#demo" id="la" data-slide="prev">
+                  <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="story-right carousel-control-next" href="#demo" id="ra" data-slide="next">
+                  <span class="carousel-control-next-icon"></span>
+                </a>
+              </div>
+            </section>
+            
+        
+    </div>
+    <section class="amazing" style="padding-top: 184px;">
+      <h2 class="a-journey">Happy to Showcase</h2>
+      <p class="a-para">
+        All the local stores are now on showcase.
+        Grow your business by showcasing your products online
+      </p>
+      <div class="row">
+        <div class="col-md-4">
+          <h2 class="ana-head">5K</h2>
+          <p class="ana-para">New visitors</p>
+        </div>
+        <div class="col-md-4">
+          <h2 class="ana-head">270</h2>
+          <p class="ana-para">accounts</p>
+        </div>
+        <div class="col-md-4">
+          <h2 class="ana-head">100<b class="ana-para">%</b></h2>
+          <p class="ana-para">Business growth</p>
+        </div>
+      </div>
+    </section>
+
+       <!--     <section class="why">
+                <p class="benefits">Benefits to Business</p>
+                <h2 class="why-heading container-sm">Why Showcase ?</h2>
+            </section>
+            <section class="card-exp">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                      <svg class="white-svg" width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding-bottom: 24px;text-align:left;">
+                        <path d="M46.875 0.25H5.625C2.46094 0.25 0 2.82812 0 5.875V47.125C0 50.2891 2.46094 52.75 5.625 52.75H46.875C49.9219 52.75 52.5 50.2891 52.5 47.125V5.875C52.5 2.82812 49.9219 0.25 46.875 0.25Z" fill="white"/>
+                        </svg>
+                        
+                      <h5 class="card-title">Modern & Clean</h5>
+                      <p class="card-text" style="padding-bottom: 60px;">a book or other written or printed work, regarded in terms of its content rather than its physical form.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card text-white bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                      <svg class="white-svg" width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding-bottom: 24px;text-align:left;">
+                        <path d="M46.875 0.25H5.625C2.46094 0.25 0 2.82812 0 5.875V47.125C0 50.2891 2.46094 52.75 5.625 52.75H46.875C49.9219 52.75 52.5 50.2891 52.5 47.125V5.875C52.5 2.82812 49.9219 0.25 46.875 0.25Z" fill="black"/>
+                        </svg>
+                        
+                      <h5 class="card-title" style="color:black">Auto Components</h5>
+                      <p class="card-text" style="padding-bottom: 60px; color:black">a book or other written or printed work, regarded in terms of its content rather than its physical form.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                      <svg class="white-svg" width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding-bottom: 24px;text-align:left;">
+                        <path d="M46.875 0.25H5.625C2.46094 0.25 0 2.82812 0 5.875V47.125C0 50.2891 2.46094 52.75 5.625 52.75H46.875C49.9219 52.75 52.5 50.2891 52.5 47.125V5.875C52.5 2.82812 49.9219 0.25 46.875 0.25Z" fill="white"/>
+                        </svg>
+                        
+                      <h5 class="card-title">Figma Exclusive</h5>
+                      <p class="card-text" style="padding-bottom: 60px;">a book or other written or printed work, regarded in terms of its content rather than its physical form.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>-->
+            
+            <section class="prof-grid">
+              <p class="g1">Showcase Now</p>
+              <h3 class="g1-head">240 Stores & more</h3>
+              <a class="g1-a" style="text-decoration: none;" href="/account">Get Started</a>
+              <img class="g2-img" style="border-radius: 100%;" width="150px" height="150px" src="<%-wtp[0].picture%>">
+              <h3 class="g2-name"><%=wtp[0].name%></h3>
+              <img class="g3-img" style="border-radius: 100%;" width="150px" height="150px" src="<%-wtp[1].picture%>">
+              <h3 class="g3-name"><%=wtp[1].name%></h3>
+              <img class="g4-img" style="border-radius: 100%;" width="150px" height="150px" src="<%-wtp[2].picture%>">
+              <h3 class="g4-name"><%=wtp[2].name%></h3>
+              <img class="g5-img" style="border-radius: 100%;" width="150px" height="150px" src="<%-wtp[3].picture%>">
+              <h3 class="g5-name"><%=wtp[3].name%></h3>
+              <p class="g6">Showcase Now</p>
+              <h2 class="g6-name">For FREE</h2>
+            </section>
+           
+            <section class="new-stores" style="padding-top: 185px;">
+              <h3 class="new-heading">New stores on Showcase</h3>
+              <p class="new-para">Check out the stores that recently joined </p>
+              <svg width="170" height="460" viewBox="0 0 159 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M-188 8.00001C-188 3.58173 -184.418 0 -180 0H151C155.418 0 159 3.58172 159 8V452C159 456.418 155.418 460 151 460H-180C-184.418 460 -188 456.418 -188 452V8.00001Z" fill="#F4F4F2"/>
+                </svg>
+                <svg style="margin-left:25px;margin-top:-10.5%" width="360" height="300" viewBox="0 0 347 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 7.99999C0 3.58171 3.58172 0 8 0H339C343.418 0 347 3.58172 347 8V292C347 296.418 343.418 300 339 300H8.00001C3.58173 300 0 296.418 0 292V7.99999Z" fill="#3371F2"/>
+                  </svg>
+               <svg style="margin-left:25px" width="360" height="460" viewBox="0 0 344 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="344" height="460" rx="6" fill="#E5EDFF"/>
+               </svg>
+               <svg style="margin-left:25px;margin-top:10.5%" width="360" height="620" viewBox="0 0 347 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 7.99999C0 3.58171 3.58172 0 8 0H339C343.418 0 347 3.58172 347 8V612C347 616.418 343.418 620 339 620H8.00001C3.58173 620 0 616.418 0 612V7.99999Z" fill="#F4F4F2"/>
+                </svg>
+                <svg style="margin-left:0px;" width="176" height="460" viewBox="0 0 116 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 8.00001C0 3.58173 3.58172 0 8 0H339C343.418 0 347 3.58172 347 8V452C347 456.418 343.418 460 339 460H8.00001C3.58173 460 0 456.418 0 452V8.00001Z" fill="#0B1514"/>
+                </svg>
+                <svg style="margin-top:-7.5%" width="170" height="460" viewBox="0 0 159 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M-188 8.00001C-188 3.58173 -184.418 0 -180 0H151C155.418 0 159 3.58172 159 8V452C159 456.418 155.418 460 151 460H-180C-184.418 460 -188 456.418 -188 452V8.00001Z" fill="#0B1514"/>
+                  </svg>
+                <svg style="margin-left:25px;margin-top:-18%" width="360" height="620" viewBox="0 0 347 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 7.99999C0 3.58171 3.58172 0 8 0H339C343.418 0 347 3.58172 347 8V612C347 616.418 343.418 620 339 620H8.00001C3.58173 620 0 616.418 0 612V7.99999Z" fill="#F4F4F2"/>
+                </svg>
+              <svg style="margin-left:25px;margin-top:-7.5%" width="360" height="460" viewBox="0 0 347 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 8.00001C0 3.58173 3.58172 0 8 0H339C343.418 0 347 3.58172 347 8V452C347 456.418 343.418 460 339 460H8.00001C3.58173 460 0 456.418 0 452V8.00001Z" fill="#E5EDFF"/>
+              </svg>
+              <svg style="margin-left:25px;margin-top:3%" width="360" height="300" viewBox="0 0 347 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 7.99999C0 3.58171 3.58172 0 8 0H339C343.418 0 347 3.58172 347 8V292C347 296.418 343.418 300 339 300H8.00001C3.58173 300 0 296.418 0 292V7.99999Z" fill="#3371F2"/>
+                </svg>
+              <svg style="margin-top:-7.5%" width="176" height="460" viewBox="0 0 116 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 8.00001C0 3.58173 3.58172 0 8 0H339C343.418 0 347 3.58172 347 8V452C347 456.418 343.418 460 339 460H8.00001C3.58173 460 0 456.418 0 452V8.00001Z" fill="#A1BEF9"/>
+              </svg>
+                    
+                  
+            </section>
+          
+            <section class="mobile-slide">
+              <marquee>
+              <ul class="d-flex ">
+              <div class="column">
+                <div class="gd1" style="background-color: #3371f2;width:347; height:300;border-radius: 10px;margin-right:20px;margin-top: 20px;">
+                  <ul>  <p class="gd1-p">Showcase Now</p>
+                    <h3 class="gd1-head">240 Stores & more</h3>
+                    <a class="gd1-a" style="text-decoration: none;" href="/account">Get Started</a></ul>
+                  </div>
+              </div>
+              <% let ind=0;%>
+              <% wtp.forEach((item)=>{%>
+              <a class="column"  href="/profile=<%-item._id%>" style="text-decoration: none;">
+                <%let colors=["#F4F4F2","#E5EDFF","#F4F4F2","#A1BEF9"];let c; if(ind+1==colors.length){ ind=0;} %>
+                <div class="gd2" style="background: <%-colors[ind] %>">
+                  <ul>  
+                    <img class="gd2-img" style="border-radius: 100%;" width="150px" height="150px" src="<%-item.picture%>">
+                    <h3 class="gd2-name"><%=item.name%></h3>
+                  </ul>
+                </div>
+              </a>
+              <%ind++;})%>
+          </marquee>
+            </section>
+       
+            <section class="how-works" style="margin-top: 18px;padding-bottom: 120px;">
+              <div class="how row" style="padding-top: 216px;">
+                <div class="lap  col-md-6">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/assets%2Flaptop-theatre-slideshow.png?alt=media&token=84669a1e-9553-4f3b-9668-1f792c130f23" width="480px" height="280px">    
+                </div>
+                <div class="content-how col-md-6" >
+                  <h2 class="how-head">How it Works</h2>
+                  <div class="content-row row">
+                    <div class="no  col-md-1">
+                      <p class="how-num">1</p>
+                    </div>
+                    <div class="col-md-11">
+                    <h3 class="content-t">Sign Up</h3>
+                    <p class="content-p ">Click on the sign up button. Choose business account to set up a shop</p>
+                  </div>
+                  </div>
+                  <div class="content-row row">
+                    <div class="no  col-md-1">
+                      <p class="how-num">2</p>
+                    </div>
+                    <div class="col-md-11">
+                      <h3 class="content-t">Create Business account</h3>
+                      <p class="content-p ">Enter all  details and verify the account. </p>
+                  </div>
+                  </div>
+                  <div class="content-row row">
+                    <div class="no  col-md-1">
+                      <p class="how-num">3</p>
+                    </div>
+                    <div class="col-md-11">
+                      <h3 class="content-t">Start uploding videos</h3>
+                      <p class="content-p ">Go to profile and choose upload videos. Start showcasing your products</p>
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+            </section>
+            <section class="setup-f  justify-content mx-auto" style="padding-top: 130px;align-items: center;text-align: center;padding-bottom: 250px;">
+              <div class="setup-s" id="cir">     </div>
+              <h2 class="setup-head">setup your account for</h2>
+              <h1 class="setup-free">FREE</h1>
+              <a class="setup-btn d-flex justify-content mx-auto" href="/account" style="text-decoration: none;">Sign up</a>
+         
+            </section>
+        
+    <script>
+            let allVids = $("#demo").find('.carousel-item');
+
+            allVids.each(function(index, el) {
+              if (index !== 0) {
+                $(this).find('video')[0].pause();
+              }
+            });
+
+            $("#demo").on('slide.bs.carousel', function(ev) {
+              let slides = $(this).find('.carousel-item');
+              let pvid = slides[ev.from].querySelectorAll('video')[0];
+              let vid = slides[ev.to].querySelectorAll('video')[0];
+              let isPlaying = vid.currentTime > 0 && vid.readyState > 2;
+
+              vid.play();
+
+
+                pvid.pause();
+
+            });
+      var link;
+       link=document.querySelectorAll('.story-v');
+      link.addEventListener('touchstart', display);
+
+    function display() {
+      var len='<%= shoes.length%>'; 
+      for (let i = 0; i < len; i++) {
+    var x = document.getElementById("div"+i);
+    var y = document.getElementById("la");
+    var z = document.getElementById("ra");
+    if (x.style.display === "none") {
+    x.style.display = "block";
+    x.style.marginTop="0px";
+
+    } else {
+    x.style.display = "none";
+
+    }
+    }
+  }
+  //description
+let string=`hello
+my name is rohit`;
+  let sp=string.split("\n");
+
+            for(let i=0;i<sp.length;i++){
+
+                console.log(sp[i]);
+            };
+  //save
+  var type='<%= user.type%>';
+  if('<%= user.type%>'!==''){
+    if('<%= user.type%>'=="business"){
+      document.getElementById('save').style.display="none";
+      document.getElementById('save-1').style.display="none";
+    }
+    else if('<%= user.type%>'=="personal"){
+      document.getElementById('save').style.display="inline";
+      document.getElementById('save-1').style.display="inline";
+    }
+    else if(type===undefined){
+      document.getElementById('save').style.display="none";
+      document.getElementById('save-1').style.display="none";
+    }
+  }
+  else{
+    document.getElementById('save').style.display="none";
+      document.getElementById('save-1').style.display="none";
+  }
+
+    </script>
+                  
+  <%- include('partials/footer.ejs'); %>
+        
+</body>
+</html>

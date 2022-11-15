@@ -1,0 +1,240 @@
+<! — views/partials/header.ejs →
+<%- include('head.ejs'); %>
+
+<!--  this <nav class="g navbar navbar-expand-sm "  >
+
+
+        <div class="nav-logo">
+            <a href="/" class="navbar-brand">
+                <img src="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/logo%2FShowCase%20logo-modified-1.png?alt=media&token=8787372b-88e2-4636-a6c6-05203bf72921" width="100%">
+                </a>
+        </div>-->
+ <!--
+        <div>
+            <a href="#" style="font-size: 13px;padding-right: 9px;text-decoration: none;color:black">Showcase</a>
+        </div>-->
+    
+   
+    
+         <!--    <form action="" class=" form-inline" id="searchbox">
+                <input class="as form-control mr-sm-2" placeholder="Search...." type="text" >
+              
+            </form>-->
+           <!-- this  <div class="nav-item searching">
+            <form class="search-box"><input type="text" placeholder=" " /><button type="reset"></button>  <button class="btn btn-success" type="submit" style="display: none;"><i class="fas fa-search"></i></button></form>
+        </div>-->
+    
+  
+     <!--nothis till line 68-->   <!--navbar links-->
+            <!-- <ul class="navbar-nav" id="navbar-ul">
+            <li class="nav-item">
+                <a href="#" class="nav-link">All Videos</a>
+            </li>
+    
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Men</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">T-shirts</a>
+                    <a href="#" class="dropdown-item">Shirts</a>
+                    <a href="#" class="dropdown-item">Shoes</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Women</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">T-shirts</a>
+                    <a href="#" class="dropdown-item">Shirts</a>
+                    <a href="#" class="dropdown-item">Shoes</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Kids</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">T-shirts</a>
+                    <a href="#" class="dropdown-item">Shirts</a>
+                    <a href="#" class="dropdown-item">Shoes</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Home & Kitchen</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">T-shirts</a>
+                    <a href="#" class="dropdown-item">Shirts</a>
+                    <a href="#" class="dropdown-item">Shoes</a>
+                </div>
+            </li>
+        </ul>
+    -->
+    
+        <!--this 
+        <div class="nav-right">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="pic nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" style="margin-left:65px;">
+                        <% if(user.picture){%>
+                            <img src='<%- user.picture %>' width="40px" height="40px" style="border-radius: 100%;margin-left:15%"/>
+                        <%}else{%>
+                        <i class="material-icons">account_circle</i>
+                        <%}%>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a id="prof" class="dropdown-item"><i class="fas fa-user-circle" style="padding-right: 8px;"></i>Profile</a>
+                        <a href="#" class="dropdown-item"><i class="fas fa-cog" aria-hidden="true" style="padding-right: 8px;"></i>Settings</a>
+                        <% if(user.name){%>
+                        <a href="/logout" class="dropdown-item"><i class="fas fa-sign-out-alt" style="padding-right: 8px;"></i>Logout</a>
+                        <%}%>
+                    </div>
+                </li>
+                <% if(!user.name){%>
+                <li class="nav-item">
+                    <a href="/login"><button class="btn btn-success" type="login" id="login-btn">Login</button></a>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+    </nav>-->
+    <nav class="navbar navbar-expand-lg" >
+        <a href="/" class="navbar-brand">
+          <img src="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/logo%2FShowCase%20logo-modified-1.png?alt=media&token=8787372b-88e2-4636-a6c6-05203bf72921" width="100%">
+          </a>
+    <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" style="color:black;" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->  
+         <!-- <span class="navbar-toggler-icon" style="color:black;"></span>
+         <i class="fas fa-bars" ></i>
+        </button>-->
+      
+    <!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->  
+          <ul class="navbar-nav mr-auto" >
+            <li class="nav-item">
+              <div class="nav-item searching">
+                <!--    <form action="" class=" form-inline" id="searchbox">
+                       <input class="as form-control mr-sm-2" placeholder="Search...." type="text" >
+                   </form>-->
+                   <form class="search-box"><input class="s-in" type="text" id="myInput" onkeyup="myFunction()" onfocus="display_search()" placeholder=" " /><button type="reset" id="cl-s" onclick="remove_search()"></button>  <button class="btn btn-success" type="submit" style="display: none;"><i class="fas fa-search"></i></button></form>
+               </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="pic nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" style="margin-left:65px;" >
+                    <% if(user.picture){%>
+                        <img src='<%- user.picture %>' width="40px" height="40px" style="border-radius: 100%;margin-right: 8%;"/>
+                    <%}else{%>
+                    <i class="material-icons">account_circle</i>
+                    <%}%>
+                </a>
+               <div class="dropdown-menu">
+                    <a id="prof" class="dropdown-item"><i class="fas fa-user-circle" style="padding-right: 8px;"></i>Profile</a>
+                    <a href="#" class="dropdown-item"><i class="fas fa-cog" aria-hidden="true" style="padding-right: 8px;"></i>Settings</a>
+                    <% if(user.name){%>
+                    <a href="/logout" class="dropdown-item"><i class="fas fa-sign-out-alt" style="padding-right: 8px;"></i>Logout</a>
+                    <%}%>
+                </div>
+            </li>
+            
+            <% if(!user.name){%>
+            <li class="nav-item">
+                <a href="/login"><button class="btn btn-success" type="login" id="login-btn">Login</button></a>
+            </li>
+            <%}%>
+        </ul>
+        
+        </div>
+        <div class="dp-menu" id="dp-1">
+            <a id="prof" class="dropdown-item"><i class="fas fa-user-circle" style="padding-right: 8px;"></i>Profile</a>
+            <a href="#" class="dropdown-item"><i class="fas fa-cog" aria-hidden="true" style="padding-right: 8px;"></i>Settings</a>
+            <% if(user.name){%>
+            <a href="/logout" class="dropdown-item"><i class="fas fa-sign-out-alt" style="padding-right: 8px;"></i>Logout</a>
+            <%}%>
+        </div>
+      </nav>
+      <div class="s-table">
+      <table class="search-table" id="myTable" style="position: absolute;display: none;" onmouseover="tab_click()" onclick="tab_click()">
+        <tbody>
+        <% wtp.forEach((item)=>{%>
+            
+        <tr data-href="/profile=<%-item._id%>">
+          <td class="img-data" style="width: 5%;"><% if(item.picture||item.picture!==undefined){%>
+            <img src='<%- item.picture %>' width="40px" height="40px" style="border-radius: 100%;margin-right: 0%;"/>
+        <%}else{%>
+        <i class="material-icons">account_circle</i>
+        <%}%>
+        </td>
+          <td class="name-data"><%=item.name%></td>
+        </tr>
+ 
+    <%})%>
+        </tbody>
+      </table>
+    <script>
+     /*   var drop=document.getElementById('dp-1');
+         drop.style.display="none";
+        function show(){
+            
+            if(drop.style.display==="none"){
+                drop.style.display="block";
+            }
+            else if(drop.style.display==="block"){
+                drop.style.display="none";
+            }
+        }*/
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }       
+            }
+        }
+        var nam='<%=user.name%>';
+        if(nam){
+         /*   var prof=nam.split(" ");
+            var prof_name="";
+            for(let i=0;i<prof.length;i++){
+                prof_name=prof_name+prof[i];
+            }
+            console.log(prof_name);
+            document.getElementById("prof").href = "/"+prof_name;*/
+            document.getElementById("prof").href = "/profile";
+        }
+        else{
+            document.getElementById("prof").href = "/login";
+        }
+        var myElement = document.getElementById('myInput');
+        function display_search(){
+            document.getElementById('myTable').style.display="block";
+        }
+
+        function tab_click(){ // declare a function that updates the state
+        document.getElementById("myInput").focus();
+        console.log("focusing")
+        }
+        document.getElementById('myTable').style.display="none";
+        table=document.getElementById('myTable');
+        document.getElementById('cl-s').addEventListener("click",remove_search);
+        function remove_search(){
+            if(document.getElementById('myTable').style.display==="block"){
+                document.getElementById('myInput').value="";
+                document.getElementById('myTable').style.display="none";
+            }
+            
+        }
+        document.addEventListener("DOMContentLoaded",()=>{
+            const rows=document.querySelectorAll("tr[data-href]");
+            rows.forEach(row =>{
+                row.addEventListener("click",()=>{
+                    window.location.href=row.dataset.href;
+                })
+            })
+        })
+    </script>

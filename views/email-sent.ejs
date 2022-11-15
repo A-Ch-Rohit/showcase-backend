@@ -1,0 +1,60 @@
+<html>
+  <%- include('partials/head'); %>
+  <head>
+      <title>Email Sent - Showcase</title>
+      <style>
+          @import url('https://fonts.googleapis.com/css2?family=Glory:wght@100;300;400;500;600;700;800&family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Lato:wght@100;300;400;700;900&display=swap');
+          .cons{
+              padding-top: 80px;
+              text-align: center;
+              font-family: 'Lato', sans-serif;
+              font-weight: 700;
+          }
+          .site-msg{
+                padding-top: 350px;
+              text-align: center;
+              font-size: 20px;
+              font-family: 'Lato', sans-serif;
+              font-weight: 400;
+          }
+          .site-msgg{
+              text-align: center;
+              font-size: 20px;
+              font-family: 'Lato', sans-serif;
+              font-weight: 400;
+          }
+          /*.site-img{
+              padding-top: 50px;
+              padding-bottom: 15px;
+
+          }*/
+          .email-block{
+            background-image:url('https://i.pinimg.com/originals/98/64/9a/98649add72e05e3cc1b8ae0e6f553c8e.gif'); 
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            background-position: center;
+            height: 600px;
+          }
+      </style>
+</head>
+<body id="body" style="overflow-x: hidden;">
+    
+    <div class="email-block">
+        <% if(e_message!==""){%>
+            <h1 class="cons"><b>Reset Password</b></h1>
+    
+    <h5 class="site-msg">Reset password link has been sent to your email address</h5>
+    <h5 class="site-msgg">Kindly please check and change your password</h5>
+    </div>
+    <%}else{%>
+    <h1 class="cons"><b>ACCOUNT ACTIVATION</b></h1>
+    
+    <h5 class="site-msg">Email has been sent to your email address</h5>
+    <h5 class="site-msgg">Kindly please activate your account</h5>
+    </div>
+    <%}%>
+    <%- include('partials/footer'); %>
+
+</body>
+</html>

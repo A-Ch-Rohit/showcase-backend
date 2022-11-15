@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%=user.name%> - Edit Profile</title>
+    </head>
+<body>
+    <%- include('partials/header.ejs'); %>
+    <section class="editing-form">
+        <div class="alert alert-warning mx-auto justify-content-center" id="c-alert"role="alert" style="width: 75%;">
+            <div class="spinner-grow text-primary" role="status" style="margin-right:15px;width: 20px;height: 20px;">
+                <span class="sr-only">Loading...</span>
+              </div>Changing profiling picture, please wait ....
+          </div>
+    </div>
+        <div class="container">
+            <a href="/profile" class="back" style="text-decoration: none;"><b>&lsaquo; Back</b></a>
+        </div><br>
+        <div class="container">
+            <div class="row">
+            <a class="form-check edp" href="/account/edit" style="padding-bottom: 93px;">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <a class="form-check-label" href="/account/edit" for="flexRadioDefault2">
+                  Profile
+                </a>
+            </a>
+            <a class="form-check ecp" href="/account/change-p" style="padding-bottom: 25px;cursor: pointer;">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+                <a class="form-check-label" href="/account/change-p" for="flexRadioDefault2">
+                  Change Password
+                </a>
+            </a>
+        </div>
+
+            <%if(user.picture!=""&&user.picture){%>
+            <img class="p-pic" src="<%-user.picture%>" width="100px" height="100px" >
+            <%}else{%>
+                <img class="p-pic" src="" width="100px" height="100px" id="pic" style="display:none;">
+                <i class="material-icons" style="margin-left:49%;font-size: 115px;" id="user">account_circle</i>
+            <%}%>
+            <form class="editing" method="post" action="/account/edit-profile">
+                <div class="up-img"><input type="file" class="add-pic" accept=".jpg,.jpeg,.png,"></div>
+                <p class="form-text">People visiting your profile will see the following info</p>
+                <div >
+                    <input type="text" class="edit-user form-control" placeholder="User Name" value="<%-user.name%>" onkeyup="stoppedTyping()" name="e_name" id="e_name" required>
+                </div>
+                <p class="abt-label">About me</p>
+                <% if(p.bio!==undefined&&p.bio){%>
+                <textarea  class="edit-about form-control" name="e_bio" id="e_bio"><%=p.bio%></textarea>
+                <%}else{%>
+                    <textarea  class="edit-about form-control" name="e_bio" id="e_bio"></textarea>
+                <%}%>
+                <p class="abt-label">Whatsapp Number*</p>
+                <input type="text"  pattern="[1-9]{1}[0-9]{9}" title="Enter a valid 10 digit Whatsapp number" class="edit-user form-control" onkeyup="stoppedTyping()" placeholder="Whatsapp Number" value="<%-p.whatsapp%>" onkeyup="stoppedTyping()" name="e_wp" id="e_wp" required>
+                <p class="abt-label">Phone Number*</p>
+                <input type="text"  pattern="[1-9]{1}[0-9]{9}" title="Enter a valid 10 digit mobile number" class="edit-user form-control" onkeyup="stoppedTyping()" placeholder="Phone Number" value="<%-p.phone%>" onkeyup="stoppedTyping()" name="e_ph" id="e_ph" required>
+                <input name="e_img" id="e_img" style="display: none;">
+                <button type="submit" id="edit-sub" class="edit-save" style="display: none;">Submit</button>
+            </form> 
+            <div class="editing">
+            <button onclick="temp()" id="tb" class="btn tempb">Temporarily disable my account</button>
+            <button onclick="del()" id="pb" class="btn dissb">Permenantly delete my account</button>
+            <button onclick="upload()" class="edit-save" id="e-save">Save</button></div>
+        </div>
+            
+    </section>
+    <div id="Deletenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="delete_close()">&times;</a>
+        <div class="container">
+            <form method="post" action="/account/delete">
+                <div class="col-md-8">
+                    <h2 style="font-family: Poppins;padding-top:35px">Are you sure you want to delete the account ?</h2>
+                    <button type="submit" id="d-submit" class="upload-submit btn btn-outline-primary">Submit</button>
+           
+                 </div>
+        
+            </form>
+            <div class="del-btns container form-group"style="font-family: Circular Std Book;">
+                <button type="submit" id="d-yes" onclick='remove_acc()'class="d-submit btn btn-outline-primary">Yes</button>
+                <button type="button" id="d-no" class="u-btn btn btn-outline-danger" onclick="delete_close()" >No</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+    <script>
+        document.getElementById('c-alert').style.display="none";
+        function del(){
+
+        document.getElementById('d-yes').disabled=false;
+        document.getElementById('d-no').disabled=false;
+        document.getElementById("Deletenav").style.height = "25%";
+
+        }
+        function delete_close(){
+            document.getElementById('d-yes').disabled=false;
+            document.getElementById("Deletenav").style.height = "0";
+        }
+        function temp(){
+            window.location.href = '/logout';
+        }
+        function remove_acc(){
+            var firebaseConfig = {
+            apiKey: "AIzaSyDPOH76XqzglF-v1w2KoDmI4zeo9GDo-tA",
+            authDomain: "showcase-7121e.firebaseapp.com",
+            projectId: "showcase-7121e",
+            storageBucket: "showcase-7121e.appspot.com",
+            messagingSenderId: "242305064415",
+            appId: "1:242305064415:web:39d96662217ef6adb6386a",
+            measurementId: "G-4X4Z7VQDW0"
+            };
+            // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+            document.getElementById('d-yes').disabled=true;
+             document.getElementById('d-no').disabled=true;
+             var ref = firebase.storage().ref('users/<%- user.name %>/');
+                    //delete the old photo and add new photo
+                    ref.listAll().then((listResults) => {
+                        const promises = listResults.items.map((item) => {
+                        return item.delete();
+                        });
+                        Promise.all(promises);
+                    });
+            setTimeout(()=>{
+                        alert("Account deleted");    
+                        document.getElementById("d-submit").click();
+                        }, 1000);
+        }
+        const input = document.querySelector('.add-pic');
+        input.addEventListener('change', updateImageDisplay);
+        if(document.getElementById('pic')){document.getElementById('pic').style.display="none"};
+        function updateImageDisplay() {
+        //while(preview.firstChild) {
+          //  preview.removeChild(preview.firstChild);
+        //}
+        const image = document.querySelector('.p-pic');
+        const img = document.querySelector('.p-pc');
+        const curFiles = input.files;
+        if(curFiles.length === 0) {
+            //para.textContent = 'No files currently selected for upload';
+            if(!image.src||image.src===""||!img.src||img.src===""){
+                document.getElementById('e-save').disabled = true;
+                document.getElementById('e-save').style.opacity=0.5; 
+            }
+        }
+        else if(curFiles.length > 1){
+                document.getElementById('e-save').disabled = true;
+                document.getElementById('e-save').style.opacity=0.5; 
+        }
+         else {
+            for(const file of curFiles) {
+            if(validFileType(file)) {
+                if(document.getElementById('pic')){ document.getElementById('pic').style.display="block";  document.getElementById('user').style.display="none"; image.src = URL.createObjectURL(file); }
+              
+                
+                img.src   = URL.createObjectURL(file); 
+                document.getElementById('e-save').disabled = false;
+                document.getElementById('e-save').style.opacity=1;         
+                
+            } else {
+                document.getElementById('e-save').disabled = true;
+                document.getElementById('e-save').style.opacity=0.5;
+            }
+        }
+    }
+}
+const fileTypes = [
+        "image/jpg",
+        "image/jpeg",
+        "image/png"
+];
+function validFileType(file) {
+    const fileTypes = [
+                "image/jpg",
+                "image/jpeg",
+                "image/png"
+        ];
+        return fileTypes.includes(file.type);
+    }
+
+
+        function stoppedTyping(){
+            if(  document.getElementById('e_name').value.length > 0 && document.getElementById('e_wp').value.length == 10 && document.getElementById('e_ph').value.length == 10) { 
+            document.getElementById('e-save').disabled = false; 
+            document.getElementById('e-save').style.opacity=1; 
+            
+        } else { 
+            document.getElementById('e-save').disabled = true;
+            document.getElementById('e-save').style.opacity=0.5; 
+            
+        }
+        }
+     /*   var firebaseConfig = {
+            apiKey: "AIzaSyDPOH76XqzglF-v1w2KoDmI4zeo9GDo-tA",
+            authDomain: "showcase-7121e.firebaseapp.com",
+            projectId: "showcase-7121e",
+            storageBucket: "showcase-7121e.appspot.com",
+            messagingSenderId: "242305064415",
+            appId: "1:242305064415:web:39d96662217ef6adb6386a",
+            measurementId: "G-4X4Z7VQDW0"
+            };
+            // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        console.log(firebase)*/
+        
+        function upload(){
+            var firebaseConfig = {
+            apiKey: "AIzaSyDPOH76XqzglF-v1w2KoDmI4zeo9GDo-tA",
+            authDomain: "showcase-7121e.firebaseapp.com",
+            projectId: "showcase-7121e",
+            storageBucket: "showcase-7121e.appspot.com",
+            messagingSenderId: "242305064415",
+            appId: "1:242305064415:web:39d96662217ef6adb6386a",
+            measurementId: "G-4X4Z7VQDW0"
+            };
+            // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+            var curfiles=input.files;
+            if(curfiles.length===1){
+                    var ref = firebase.storage().ref('users/<%- user.name %>/profile picture/');
+                    //delete the old photo and add new photo
+                    ref.listAll().then((listResults) => {
+                        const promises = listResults.items.map((item) => {
+                        return item.delete();
+                        });
+                        Promise.all(promises);
+                    });
+
+                    ref = firebase.storage().ref('users/<%- user.name %>/profile picture');
+                    const file = document.querySelector('.add-pic').files[0];
+                    const name = +new Date() + "-" + file.name;
+                    const metadata = {
+                        contentType: file.type
+                    };    
+                    const task = ref.child(name).put(file, metadata);
+                    t=task;
+                    task.on('state_changed', 
+                            (snapshot) => {
+                            document.getElementById('e-save').disabled = true;
+                            document.getElementById('c-alert').style.display="block";
+                            document.getElementById('tb').style.top="468px";
+                            document.getElementById('pb').style.top="528px";
+                            document.getElementById('e-save').style.opacity=0.5;
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log('Upload is ' + progress + '% done');
+                            switch (snapshot.state) {
+                            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                                console.log('Upload is paused');
+                                break;
+                            case firebase.storage.TaskState.RUNNING: // or 'running'
+                                console.log('Upload is running');
+                                break;
+                            }
+                        }, 
+                        (error) => {
+                            // Handle unsuccessful uploads
+                        }, 
+                        () => {
+                            // Handle successful uploads on complete
+                            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                            task.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                                document.getElementById('c-alert').style.display="none";
+                                document.getElementById('tb').style.top="428px";
+                            document.getElementById('pb').style.top="488px";
+                            console.log('File available at', downloadURL);
+                            });
+                        }
+                        );
+
+            task
+                .then(snapshot =>
+                    snapshot.ref.getDownloadURL()
+                )
+                .then(url => {
+                    console.log(url);
+                    document.getElementById("e_img").value = url;
+                    setTimeout(()=>{
+                        alert("Profile Pic Changed");    
+                        document.getElementById("edit-sub").click();
+                        }, 1000);
+                })
+                .catch(console.error);
+        }
+    else{
+        alert("Data Updated");    
+        document.getElementById("edit-sub").click();
+    }
+    }
+
+    </script>
+ 
+</body>
+<%- include('partials/footer.ejs'); %>
+</html>

@@ -1,0 +1,432 @@
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Join Us - Showcase</title>
+        <link rel="icon" type="image/x-icon" href="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/logo%2FShowCase%20logo-modified.ico?alt=media&token=1cb0428c-bfbf-4801-9c1a-32ab9e016fa4">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/css/fontawesome.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    body{
+        overflow: hidden scroll;
+    }
+    
+    
+    .nav-item.dropdown:hover > .dropdown-menu{
+    display:block;
+}
+a.forget{
+    text-decoration: none;
+    text-align: center;
+    padding-left: 28%;
+}
+
+#navbar-ul{
+    padding-left: 15%;
+}
+
+#navbar-ul > li{
+    padding-left: 10px ;
+}
+
+#navbar-ul li > a{
+    color: #0b1514;
+}
+.navbar-brand{
+    width: 110px;
+    padding-right: 0%;
+}
+
+#searchbox > button, #login-btn{
+    background-color: #3371f2;
+    border-color: #3371f2;
+    border-radius: 8px;
+}
+.searching{
+    width: 35%;
+    height: 35%;
+    margin-left: 1%;
+    margin-top: 0.3%;
+    display: inline;
+}
+.search-box {
+	 border: solid 5px black;
+	 display: inline-block;
+	 position: relative;
+	 border-radius: 50px;
+}
+ .search-box input[type="text"] {
+	 font-family: Raleway, sans-serif;
+	 font-size: 15px;
+	 width: 10px;
+	 height: 20px;
+	 padding: 5px 10px 5px 10px;
+	 border: none;
+	 box-sizing: border-box;
+	 border-radius: 50px;
+	 transition: width 800ms cubic-bezier(0.68, -0.55, 0.27, 1.55) 150ms;
+}
+ .search-box input[type="text"]:focus {
+	 outline: none;
+}
+ .search-box input[type="text"]:focus, .search-box input[type="text"]:not(:placeholder-shown) {
+	 width: 300px;
+	 transition: width 400ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+ .search-box input[type="text"]:focus + button[type="reset"] {
+	 bottom: 2px;
+	 right: 10px;
+	 transition: bottom 150ms ease-out 800ms, right 150ms ease-out 800ms;
+}
+.search-box input[type="text"]:not(:placeholder-shown) + button[type="reset"] {
+	 bottom: 2px;
+	 right: 10px;
+	 transition: bottom 150ms ease-out 800ms, right 150ms ease-out 800ms;
+}
+ .search-box input[type="text"]:focus + button[type="reset"]:after, .search-box input[type="text"]:not(:placeholder-shown) + button[type="reset"]:after {
+	 top: 0px;
+	 right: 5px;
+	 opacity: 1;
+	 transition: top 150ms ease-out 950ms, right 150ms ease-out 950ms, opacity 150ms ease 950ms;
+}
+ .search-box button[type="reset"] {
+	 background-color: transparent;
+	 width: 15px;
+	 height: 15px;
+	 border: 0;
+	 padding: 0;
+	 outline: 0;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 position: absolute;
+	 bottom: -13px;
+	 right: -11px;
+	 transition: bottom 150ms ease-out 150ms, right 150ms ease-out 150ms;
+}
+ .search-box button[type="reset"]:before{
+	 content: "";
+	 height: 15px;
+	 border-left: solid 5px black;
+	 position: absolute;
+	 transform: rotate(-45deg);
+}
+
+.search-box button[type="reset"]:after {
+	 content: "";
+	 height: 15px;
+	 border-left: solid 5px black;
+	 position: absolute;
+	 transform: rotate(-45deg);
+}
+
+ .search-box button[type="reset"]:after {
+	 transform: rotate(45deg);
+	 opacity: 0;
+	 top: -20px;
+	 right: -10px;
+	 transition: top 150ms ease-out, right 150ms ease-out, opacity 150ms ease-out;
+}
+.nav-right ul > li{
+    padding: 0px 10px 0px 0px;
+}
+
+.nav-right{
+    margin-left: 50%;
+}
+.as{
+    border-radius: 10px;
+}
+
+/*full-width input fileds*/
+.login-email,.login-pwd {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-color: none;
+    box-sizing: border-box;
+    
+    
+}
+input[type=text]:focus,input[type=password]:focus{
+    border-color: #3371f2;
+}
+/*set a style for the submit button*/
+.signbtn{
+    background-color: #3371f2;
+    color: white;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
+    opacity: 0.9;
+    
+
+
+}
+.signbtn:hover{
+    opacity: 1;
+}
+
+.googlebtn{
+    background-color: none;
+    color: black;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: none;
+    width: 40%;
+    opacity: 0.9;
+}
+
+.gglebtn{
+    background-color: none;
+    text-decoration: none;
+    color: black;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.googlebtn:hover{
+    opacity: 1;
+}
+    
+    .content{
+        display:grid;
+        height:100%;
+        place-items: center;
+        text-align: center;
+       
+       }
+       .Individual{
+    padding: 20px 0px 20px 0px;
+}
+
+.Business{
+    padding-bottom: 20px;
+}
+.Personal-element{
+    width:100%;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+a.Personal{
+    text-decoration: none;
+    align-items: center;
+    text-align: left;
+    color: black;
+    box-shadow: 0 4px 8px 0 rgba(58, 57, 57, 0.2), 0 6px 20px 0 rgba(58, 57, 57, 0.2);
+    border:0;
+    border-radius: 8px;
+    width:425px;
+}
+.Personal:hover{
+    text-decoration: none;
+    border-color: #3371f2;
+    border: 8px;
+}
+
+.per{
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 25px;
+    text-align: left;
+}
+.Business-element{
+    width:100%;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+a.Business{
+    text-decoration: none;
+    align-items: center;
+    text-align: left;
+    color: black;
+    box-shadow: 0 4px 8px 0 rgba(58, 57, 57, 0.2), 0 6px 20px 0 rgba(58, 57, 57, 0.2);
+    border:0;
+    border-radius: 8px;
+    padding-bottom: 5px;
+    width:425px;
+}
+.Business:hover{
+    text-decoration: none;
+    border-color: #3371f2;
+    border: 8px;
+}
+.bus{
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 15px;
+    
+    text-align: left;
+}
+.head_type{
+    padding-top: 25px;
+}
+.content_type{
+    padding-left: 15px;
+}
+.Individual button{
+    width: 428px;
+    height: 109.57px;
+    border: 0;
+    border-radius: 8px;
+    
+}
+.Individual:hover{
+    border-color: #3371f2;
+}
+.join:hover{
+    border-color: #3371f2;
+    
+}
+.Individual button > h6{
+    padding-top: 20px;
+}
+
+.Business button > h6{
+    padding-top: 20px;
+}
+
+.Business button{
+    width: 428px;
+    height: 109.57px;
+    border: 0px;
+    border-radius: 8px;
+}
+
+.Individual button > i{
+    position: relative;
+    right: 40%;
+    bottom: 75%;
+}
+
+.Business button > i{
+    position: relative;
+    right: 40%;
+    bottom: 70%;
+}
+.acct{
+    display:none;
+}
+       
+.rt{
+    padding-left: 30px;
+    transition: .5s ease;
+    opacity: 0;
+    color:#3371f2;
+}
+    
+.Business:hover i{
+    opacity:1;
+}
+.Personal:hover i{
+    opacity: 1;
+}
+        </style>
+        
+    </head>
+    <body>
+        <%- include('partials/header.ejs'); %>
+
+     <br>
+     <br>
+     <div  class="container" style="text-align: center;">
+       <h2>Join Us</h2>
+       <p>To begin this journey ,tell us what type of account <br>you'd be opening</p>
+        <div class="Personal-element">
+        <a class="Personal d-flex flex-row container-sm" href="/personal/sign-up">
+            <i class="per material-icons" id="person" style="font-size: 47px; color: #3371f2;padding-right: 2%; ">person</i>
+            <div class="content_type d-flex flex-column" >
+                <h6 class="head_type"><b>Individual</b></h6>
+                <input class="acct" type="text" name="type" value="Personal"/>
+                <p class="para_type">Personal account to manage all you<br> activities</p>
+            </div>           
+            <i class="rt fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        </div>
+
+        <div class="Business-element">
+            <a class="Business d-flex flex-row container-sm" href="/business/sign-up">
+                <i class="bus fa fa-suitcase" id="fa-suitcase" style="font-size: 35px; color: #3371f2;"></i>
+                <div class="content_type d-flex flex-column">
+                    <h6 class="head_type"><b>Business</b></h6>
+                    <input class="acct" type="text" name="type" value="Business"/>
+                    <p class="para_type">Own or belong to a company, this is<br>for you.</p>
+                </div>           
+                <i class="rt fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            </div>
+
+  <!--    <div class="Individual">
+        <form action="/account" method="post">
+         <button class="join" type="submit">
+           <h6><b>Individual</b></h6>
+           <input class="acct" type="text" name="type" value="Personal"/>
+           <p>Personal account to manage all you<br> activities
+            </p>
+           <i class="material-icons" id="person" style="font-size: 47px; color: #3371f2; ">person</i>
+           
+         </button>
+        </form>
+       </div>
+       <div class="Business">
+        <form action="/account" method="post">
+            <button class="join" type="submit">
+           <h6><b>Business</b></h6>
+           <input class="acct" type="text" name="type" value="Business"/>
+           <p>Own or belong to a company, this is<br>for you.</p>
+           <i class="fa fa-suitcase" id="fa-suitcase" style="font-size: 43px; color: #3371f2;"></i>
+         </button>
+         </form>
+       </div>--> 
+ <!---
+       <div>
+         <div class="form-group" id="individual">
+           
+           <button type="button" class="individualbtn">
+             <i class="material-icons" id="person" style="font-size: 47px; color: #3371f2; ">person</i>
+             <h6><b>Individual</b></h6>
+             <p>Personal account to manage all you<br> activities</p>
+           </button>
+         </div>
+         <div class="form-group" id="Business">
+           <button type="button" class="businessbtn"><i class="fa fa-suitcase" id="fa-suitcase" style="font-size: 43px; color: #3371f2;"></i><h6><b>Business</b></h6><p>Own or belong to a company, this is<br>for you.</p>
+           </button>
+         </div>
+       </div>
+ --->
+ 
+       <p>Already have an account?<a href="/login" style="color: #3371f2;text-decoration: none;"> Sign In</a></p>
+      
+    </div>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+
+
+     <%- include('partials/footer.ejs'); %>
+
+
+</body>
+</html>

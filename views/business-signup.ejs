@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business - Register</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/logo%2FShowCase%20logo-modified.ico?alt=media&token=1cb0428c-bfbf-4801-9c1a-32ab9e016fa4">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+     *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body{
+    overflow: hidden scroll;
+}
+
+
+
+.nav-item.dropdown:hover > .dropdown-menu{
+    display:block;
+}
+a.forget{
+    text-decoration: none;
+    text-align: center;
+    padding-left: 28%;
+}
+
+#navbar-ul{
+    padding-left: 15%;
+}
+
+#navbar-ul > li{
+    padding-left: 10px ;
+}
+
+#navbar-ul li > a{
+    color: #0b1514;
+}
+.navbar-brand{
+    width: 110px;
+    padding-right: 0%;
+}
+
+#searchbox > button, #login-btn{
+    background-color: #3371f2;
+    border-color: #3371f2;
+    border-radius: 8px;
+}
+.searching{
+    width: 35%;
+    height: 35%;
+    margin-left: 1%;
+    margin-top: 0.3%;
+    display: inline;
+}
+.search-box {
+	 border: solid 5px black;
+	 display: inline-block;
+	 position: relative;
+	 border-radius: 50px;
+}
+ .search-box input[type="text"] {
+	 font-family: Raleway, sans-serif;
+	 font-size: 15px;
+	 width: 10px;
+	 height: 20px;
+	 padding: 5px 10px 5px 10px;
+	 border: none;
+	 box-sizing: border-box;
+	 border-radius: 50px;
+	 transition: width 800ms cubic-bezier(0.68, -0.55, 0.27, 1.55) 150ms;
+}
+ .search-box input[type="text"]:focus {
+	 outline: none;
+}
+ .search-box input[type="text"]:focus, .search-box input[type="text"]:not(:placeholder-shown) {
+	 width: 300px;
+	 transition: width 400ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+ .search-box input[type="text"]:focus + button[type="reset"] {
+	 bottom: 2px;
+	 right: 10px;
+	 transition: bottom 150ms ease-out 800ms, right 150ms ease-out 800ms;
+}
+.search-box input[type="text"]:not(:placeholder-shown) + button[type="reset"] {
+	 bottom: 2px;
+	 right: 10px;
+	 transition: bottom 150ms ease-out 800ms, right 150ms ease-out 800ms;
+}
+ .search-box input[type="text"]:focus + button[type="reset"]:after, .search-box input[type="text"]:not(:placeholder-shown) + button[type="reset"]:after {
+	 top: 0px;
+	 right: 5px;
+	 opacity: 1;
+	 transition: top 150ms ease-out 950ms, right 150ms ease-out 950ms, opacity 150ms ease 950ms;
+}
+ .search-box button[type="reset"] {
+	 background-color: transparent;
+	 width: 15px;
+	 height: 15px;
+	 border: 0;
+	 padding: 0;
+	 outline: 0;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 position: absolute;
+	 bottom: -13px;
+	 right: -11px;
+	 transition: bottom 150ms ease-out 150ms, right 150ms ease-out 150ms;
+}
+ .search-box button[type="reset"]:before{
+	 content: "";
+	 height: 15px;
+	 border-left: solid 5px black;
+	 position: absolute;
+	 transform: rotate(-45deg);
+}
+
+.search-box button[type="reset"]:after {
+	 content: "";
+	 height: 15px;
+	 border-left: solid 5px black;
+	 position: absolute;
+	 transform: rotate(-45deg);
+}
+
+ .search-box button[type="reset"]:after {
+	 transform: rotate(45deg);
+	 opacity: 0;
+	 top: -20px;
+	 right: -10px;
+	 transition: top 150ms ease-out, right 150ms ease-out, opacity 150ms ease-out;
+}
+.nav-right ul > li{
+    padding: 0px 10px 0px 0px;
+}
+
+.nav-right{
+    margin-left: 50%;
+}
+.as{
+    border-radius: 10px;
+}
+
+/*full-width input fileds*/
+.login-email,.login-pwd {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-color: none;
+    box-sizing: border-box;
+    
+    
+}
+input[type=text]:focus,input[type=password]:focus{
+    border-color: #3371f2;
+}
+/*set a style for the submit button*/
+.signbtn{
+    background-color: #3371f2;
+    color: white;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
+    opacity: 0.9;
+    
+
+
+}
+.signbtn:hover{
+    opacity: 1;
+}
+
+.googlebtn{
+    background-color: none;
+    color: black;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: none;
+    width: 40%;
+    opacity: 0.9;
+}
+
+.gglebtn{
+    background-color: none;
+    text-decoration: none;
+    color: black;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.googlebtn:hover{
+    opacity: 1;
+}
+/*set a style for the submit button*/
+.registerbtn{
+    background-color: #3371f2;
+    color: white;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: none;
+    width: 40%;
+    opacity: 0.9;
+    
+
+
+}
+.registerbtn:hover{
+    opacity: 1;
+}
+.form-group > p  {
+    display: inline-flex;
+    padding-left: 2%;
+
+}
+.form-group >p3 {
+    display: inline-flex;
+    padding-left: 85%;
+} 
+.form-group >p4{
+    display: inline-flex;
+    padding-left: 83%;
+}  
+
+.googlebtn{
+    background-color: none;
+    color: black;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border: none;
+    width: 40%;
+    opacity: 0.9;
+}
+
+.googlebtn:hover{
+    opacity: 1;
+}
+
+.content{
+    display:grid;
+    height:100%;
+    place-items: center;
+    text-align: center;
+   
+   }
+   input.b-name,input.b-email,input.b-pwd{
+    width: 40%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-color: none;
+    box-sizing: border-box;
+   }
+   .r{
+    width: 40%;
+}
+   
+    </style>
+</head>
+<body>
+    <%- include('partials/header.ejs'); %>
+    <br>
+    <% if(b_message!==""){%>
+        <div class="container">
+        <div class="flash alert alert-danger" role="alert">
+            <%=b_message %>
+          </div>
+        </div>
+    <%}%>
+    <div class="container">
+        <div class="form-group">
+            <a href="/account" class="back" style="text-decoration: none;"><b>&lsaquo; Back</b></a>
+        </div>
+        <div class="form-group"; style="text-align: center;" >
+            <p3 style="color: #909497;margin-left: 5%">STEP 01/02</p3><br>
+            <p4 style="color: #909497"><b>Business Info.</b></p4>
+            </div>
+    </div>
+    <div class="business-form container">
+        <form action="/business/sign-up"  method="post" >
+            <br>
+            <br>
+            <br>        
+        <div class="form-group" >
+            <h3 ><b>Register Business Account!</b><br></h3>
+         </div>
+         <div class="form-group">   
+            <p2 >For the purpose of industry regulation, your details<br> are requied.</p2>
+        </div>
+           
+               <hr class="r">
+               <div class="form-group">
+                <label for="name"><b>Your fullname*</b></label><br>
+                <input type="text" class="b-name form-control" placeholder="Invictus Innocent" name="b_name" id="name" required>
+        </div>
+        <div class="form-group" >
+            <label for="email" ><b>Email address*</b></label><br>
+            <input pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" title="Enter a valid email id" class="b-email form-control" placeholder="Enter email address" name="b_email" id="email" required>
+    </div>
+
+   
+        <div class="form-group">
+            <label for="create"><b>Create password*</b></label><br>
+            <input type="password" class="b-pwd form-control" placeholder="Enter password" name="b_cp" id="create" required>
+        </div><br>
+        
+        <div class="form-group">
+        
+            <input type="checkbox" name="terms & conditions" required> 
+            <label for="terms and conditions">I agree to terms & conditions</label>
+         
+     
+         </div>  
+
+        <div class="form-group" >
+            <button type="submit" class="registerbtn">Save & Continue</button>
+       </div>
+  <!--    <p style="text-align: center;">Or</p>
+       <div class="form-group"; style="text-align: center;">
+        <button type="button" class="googlebtn">Register with Google</button>
+    </div>--> 
+       
+</form>
+    </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+      <%- include('partials/footer.ejs'); %>
+
+
+</body>
+</html>

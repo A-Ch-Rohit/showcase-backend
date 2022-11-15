@@ -1,0 +1,208 @@
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Google Register</title>
+        <link rel="icon" type="image/x-icon" href="https://firebasestorage.googleapis.com/v0/b/showcase-7121e.appspot.com/o/logo%2FShowCase%20logo-modified.ico?alt=media&token=1cb0428c-bfbf-4801-9c1a-32ab9e016fa4">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    body{
+        overflow: hidden scroll;
+    }
+    
+    
+    
+    #navbar-ul{
+        padding-left: 15%;
+    }
+    
+    #navbar-ul > li{
+        padding-left: 10px ;
+    }
+    
+    #navbar-ul li > a{
+        color: #0b1514;
+    }
+    
+    #searchbox > button, #login-btn{
+        background-color: #3371f2;
+        border-color: #3371f2;
+        border-radius: 8px;
+    }
+    
+    .nav-right ul > li{
+        padding: 0px 10px 0px 0px;
+    }
+    
+    .nav-right{
+        padding-left: 15%
+    }
+    
+    .back{
+        text-decoration: none;
+        color: black
+    }
+    
+    
+    /*full-width input fileds*/
+        input[type=password] {
+        width: 40%;
+        padding-left: 300px;
+        padding: 8px 12px;
+        margin: 8px 0;
+        border-color: none;
+        box-sizing: border-box;
+        
+    }
+    input[type=text]:focus,input[type=password]:focus{
+        border-color: #3371f2;
+    }
+    
+    
+    /*set a style for the submit button*/
+    .registerbtn{
+        background-color: #3371f2;
+        color: white;
+        padding: 8px 12px;
+        margin: 8px 0;
+        border: none;
+        width: 40%;
+        opacity: 0.9;
+        
+    
+    
+    }
+    .registerbtn:hover{
+        opacity: 1;
+    }
+    .form-group > p  {
+        display: inline-flex;
+        padding-left: 2%;
+    
+    }
+    .form-group >p3 {
+        display: inline-flex;
+        padding-left: 85%;
+    } 
+    .form-group >p4{
+        display: inline-flex;
+        padding-left: 83%;
+    }  
+    
+    .googlebtn{
+        background-color: none;
+        color: black;
+        padding: 8px 12px;
+        margin: 8px 0;
+        border: none;
+        width: 40%;
+        opacity: 0.9;
+    }
+    
+    .googlebtn:hover{
+        opacity: 1;
+    }
+    
+    .content{
+        display:grid;
+        height:100%;
+        place-items: center;
+        text-align: center;
+       
+       }
+       input.p-name,input.p-email,input.p-pwd,select.b-ct{
+        width: 40%;
+        padding: 8px 12px;
+        margin: 8px 0;
+        margin-left: 330px;
+        border-color: none;
+        box-sizing: border-box;
+       }
+    
+    
+        </style>
+        
+    </head>
+    <body>
+        <%- include('partials/header.ejs'); %>
+
+        <br>
+
+        <form action="/auth/google/register" method="post" class="container">
+          <div class="form-group" style="text-align: center;" >
+              <p3 style="color: #909497;">STEP 01</p3><br>
+              
+          
+              <p4 style="color: #909497;"><b>Personal Info.</b></p4>
+              </div>
+              <br>
+              <br>
+              <br>        
+          <div class="form-group" style=" padding-left: 30%;"  >
+              <h3 ><b>Register wtih Google Account!</b><br></h3>
+           </div>
+           <div class="form-group" style="padding-left: 30%;">   
+              <p2 >For the purpose of industry regulation, your details<br> are requied.</p2>
+          </div>
+             
+                 <hr class="r" style=" margin-left: 30%;width: 40%;">
+                 <div class="form-group" ; style="text-align: center;" >
+                  <label for="name" style="padding-right: 30%;"><b>Your fullname*</b></label><br>
+                  <input type="text" class="p-name form-control" placeholder="Invictus Innocent" name="name" value='<%- acct.name %>' id="name" disabled>
+          </div>
+          <div class="form-group" ; style="text-align: center;">
+              <label for="email" style="padding-right: 30%;"><b>Email address*</b></label><br>
+              <input type="text" class="p-email form-control" placeholder="Enter email address" name="email" value='<%- acct.email %>' id="email" disabled>
+      </div>
+    
+     
+          <div class="form-group"; style="text-align: center; " >
+              <label for="create" style="padding-right: 28%;" ><b>Create password*</b></label><br>
+              <input type="password"  class="p-pwd form-control" placeholder="Enter password" name="gp" id="create" required>
+          </div>
+          <br>
+
+          <div class="form-group"; style="text-align: center;">
+            <label for="type" ; style="padding-right: 26%;"><b>Select Account Type*</b></label><br>
+            <select id="type"  class="b-ct form-control"  name="act_type" placeholder="Account type" required>
+               <option>Personal</option>
+               <option>Business</option>
+            </select>
+            </div>
+          <div class="form-group" style="text-align: center; padding-right: 19%;">
+          
+              <input type="checkbox" name="terms & conditions" required> 
+              <label for="terms and conditions">I agree to terms & conditions</label>
+           
+       
+           </div>  
+    
+          <div class="form-group"; style="text-align: center;">
+              <button type="submit" class="registerbtn">Continue</button>
+         </div>
+         
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <%- include('partials/footer.ejs'); %>
+    
+    
+    </body>
+    </html>
